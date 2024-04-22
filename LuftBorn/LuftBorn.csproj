@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+	  <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.17" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LuftBorn.Application\LuftBorn.Application.csproj" />
+    <ProjectReference Include="..\LuftBorn.Domain\LuftBorn.Domain.csproj" />
+    <ProjectReference Include="..\LuftBorn.Infrastructure\LuftBorn.Infrastructure.csproj" />
+
+  </ItemGroup>
+
+</Project>
