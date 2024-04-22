@@ -13,4 +13,8 @@
     <ProjectReference Include="..\LuftBorn.Domain\LuftBorn.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="MappingProfiles\" />
+  </ItemGroup>
+
 </Project>
