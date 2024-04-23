@@ -50,6 +50,7 @@ namespace LuftBorn
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();
+            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200"));
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

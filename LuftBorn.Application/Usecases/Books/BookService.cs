@@ -27,7 +27,9 @@ namespace LuftBorn.Application.Usecases.Books
             return books.Select(x => new BookDto
             {
                 Id = x.Id,
-                Name = x.Name
+                Name = x.Name,
+                PublishedDate = x.PublishedDate,
+                Description = x.Description
             });
 
         }
@@ -38,7 +40,9 @@ namespace LuftBorn.Application.Usecases.Books
             return new BookDto
             {
                 Id = bookModel.Id,
-                Name = bookModel.Name
+                Name = bookModel.Name,
+                PublishedDate = bookModel.PublishedDate,
+                Description = bookModel.Description
             };
 
         }
@@ -48,7 +52,7 @@ namespace LuftBorn.Application.Usecases.Books
             {
                 return new SuccessMessageDto { IsSuccess = false, Message = "Name of the Book is required" };
             }
-            _bookRepository.Add(Book.Create(Guid.NewGuid(), bookDto.Name));
+            _bookRepository.Add(Book.Create(Guid.NewGuid(), bookDto.Name, bookDto.Description,bookDto.PublishedDate));
 
             var noOfAffectedRows = await _unitOfWork.SaveChangesAsync();
 
@@ -65,7 +69,7 @@ namespace LuftBorn.Application.Usecases.Books
             {
                 return new SuccessMessageDto { IsSuccess = false, Message = "Name of the Book is required" };
             }
-            _bookRepository.Update(Book.Create(bookDto.Id,bookDto.Name));
+            _bookRepository.Update(Book.Create(bookDto.Id, bookDto.Name, bookDto.Description, bookDto.PublishedDate));
             await _unitOfWork.SaveChangesAsync();
 
             return new SuccessMessageDto { IsSuccess = true, Message = "Book is Updated successfully" };
