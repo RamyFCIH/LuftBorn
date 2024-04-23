@@ -52,7 +52,7 @@ namespace LuftBorn.Application.Usecases.Books
             {
                 return new SuccessMessageDto { IsSuccess = false, Message = "Name of the Book is required" };
             }
-            _bookRepository.Add(Book.Create(Guid.NewGuid(), bookDto.Name, bookDto.Description,bookDto.PublishedDate));
+            _bookRepository.Add(Book.Create(Guid.NewGuid(), bookDto.Name, bookDto.Description, bookDto.PublishedDate));
 
             var noOfAffectedRows = await _unitOfWork.SaveChangesAsync();
 
@@ -65,11 +65,20 @@ namespace LuftBorn.Application.Usecases.Books
 
         public async Task<SuccessMessageDto> UpdateBook(BookDto bookDto)
         {
+            var bookInDb = await _bookRepository.GetByIdAsync(bookDto.Id);
+
+            if (bookInDb is null)
+            {
+                return new SuccessMessageDto { IsSuccess = false, Message = "This Book is not found" };
+            }
+
             if (bookDto is null || string.IsNullOrEmpty(bookDto.Name))
             {
                 return new SuccessMessageDto { IsSuccess = false, Message = "Name of the Book is required" };
             }
-            _bookRepository.Update(Book.Create(bookDto.Id, bookDto.Name, bookDto.Description, bookDto.PublishedDate));
+
+            bookInDb = Book.Edit(bookInDb.Id, bookDto.Name, bookDto.Description, bookDto.PublishedDate);
+            _bookRepository.Update(bookInDb);
             await _unitOfWork.SaveChangesAsync();
 
             return new SuccessMessageDto { IsSuccess = true, Message = "Book is Updated successfully" };
@@ -85,7 +94,7 @@ namespace LuftBorn.Application.Usecases.Books
             _bookRepository.Delete(bookInDb);
             await _unitOfWork.SaveChangesAsync();
 
-            return new SuccessMessageDto {IsSuccess = true, Message = "Book is deleted successfully" };
+            return new SuccessMessageDto { IsSuccess = true, Message = "Book is deleted successfully" };
         }
 
     }

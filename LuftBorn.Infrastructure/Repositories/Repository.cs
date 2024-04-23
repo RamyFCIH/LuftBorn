@@ -27,7 +27,7 @@ namespace LuftBorn.Infrastructure.Repositories
             CancellationToken cancellationToken = default)
         {
             return await DbContext
-                .Set<T>()
+                .Set<T>().AsNoTracking()
                 .FirstOrDefaultAsync(user => user.Id == id, cancellationToken);
         }
 

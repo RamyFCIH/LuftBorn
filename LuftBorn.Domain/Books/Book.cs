@@ -5,7 +5,7 @@ namespace LuftBorn.Domain.Books
 {
     public sealed class Book : Entity
     {
-        private Book(Guid id, string name,string description,DateTime publishedDate)
+        private Book(Guid id, string name, string description, DateTime publishedDate)
             : base(id)
         {
             Name = name;
@@ -27,11 +27,16 @@ namespace LuftBorn.Domain.Books
         /// <param name="description""></param>
         /// <param name="publishedDate""></param>
         /// <returns></returns>
-        public static Book Create(Guid id, string name,string description,DateTime publishedDate)
+        public static Book Create(Guid id, string name, string description, DateTime publishedDate)
         {
-            var newModel = new Book(id,name,description,publishedDate);
+            var newModel = new Book(id, name, description, publishedDate);
             return newModel;
         }
 
+        public static Book Edit(Guid id, string name, string description, DateTime publishedDate)
+        {
+            var newModel = new Book(id, name, description, publishedDate);
+            return newModel;
+        }
     }
 }
